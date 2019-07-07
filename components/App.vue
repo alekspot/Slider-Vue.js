@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import Slider from "./assets/Slider"
-  import {slidesImg} from "./slides.js"
+  import Slider from "./Slider.vue"
+  import {slidesImg} from "../slides.js"
 export default {
   name: 'app',
   components:{
