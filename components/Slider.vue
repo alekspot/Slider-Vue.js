@@ -1,13 +1,13 @@
 <template>
     <div class="slider" ref="slider">
         <ul class="slides" :class="{'slides_animate':animate}" :style="sliderLeft">
-            <li v-for="(slide,key,index) in sl" :style="styleSlide(slide)" class="slide">
+            <li v-for="(slide,key) in sl" :key="key" :style="styleSlide(slide)" class="slide">
                 <img :src="slide.img" alt="">
             </li>
         </ul>
         <button class="prev" @click="prev">&#8249;</button>
         <div class="slider__nav">
-            <div :class="['slider__tab',n-1==currentSlide ? 'slider__tab_active' : '']" v-for="n in sl.length" @click="moveTo(n-1)"></div>
+            <div  class="slider__tab" :class="{'slider__tab_active': n-1==currentSlide}" v-for="n in sl.length" :key="n" @click="moveTo(n-1)"></div>
         </div>
         <button class="next" @click="next">&#8250;</button>
     </div>
@@ -131,7 +131,7 @@
                 var self = this;
                 setTimeout(function(){
                     self.animate = true;
-                },10);
+                },0);
             }
         },
         computed:{
@@ -151,7 +151,7 @@
     }
 </script>
 
-<style scoped>
+<style>
     .slider {
         overflow: hidden;
         max-width: 800px;
@@ -168,19 +168,22 @@
     }
     .slider__nav {
         position: absolute;
+        background: rgba(0,0,0,0.6);
         display: flex;
-        justify-content: space-around;
-        width: 30%;
-        bottom:5%;
+        justify-content: center;
+        width: 100%;
+        bottom:0;
+        padding: 10px 0;
     }
     .slider__tab{
         width: 20px;
         height: 20px;
         background: #fff;
         border-radius: 50%;
+        margin: 0 25px;
     }
     .slider__tab_active{
-        background: red;
+        background: yellow;
     }
     .slide {
         position: relative;
@@ -188,7 +191,7 @@
         list-style: none;
         font-size: 80px;
         text-align: center;
-        padding: 1% 0;
+        padding: 0;
         background-size: cover !important;
         color:#fff;
         line-height: 0;
